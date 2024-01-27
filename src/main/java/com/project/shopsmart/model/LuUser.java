@@ -1,5 +1,6 @@
 package com.project.shopsmart.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -8,13 +9,12 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import java.util.Date;
+
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  * Created by rajeevkumarsingh on 27/06/17.
@@ -44,6 +44,14 @@ public class LuUser {
 
     @Column(name = "password")
     private String password;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Kolkata")
+    @Column(name = "create_time")
+    private Date createTime;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Kolkata")
+    @Column(name = "update_time")
+    private Date updateTime;
 
     // Constructors, Getters, and Setters remain the same
 
@@ -107,4 +115,27 @@ public class LuUser {
         this.password = password;
     }
 
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+    
+    
+
+    @PrePersist
+    protected void onCreate() {
+        createTime = new Date();
+        updateTime = new Date();
+    }
 }
