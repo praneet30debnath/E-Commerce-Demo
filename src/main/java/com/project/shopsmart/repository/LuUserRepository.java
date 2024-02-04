@@ -1,6 +1,9 @@
 package com.project.shopsmart.repository;
 
 import com.project.shopsmart.model.LuUser;
+
+import java.util.Date;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -17,6 +20,6 @@ public interface LuUserRepository extends JpaRepository<LuUser, Integer> {
 
     @Modifying
     @Transactional
-    @Query("UPDATE LuUser u SET u.password = :newPassword WHERE u.userId = :userId")
-    void changePassword(@Param("userId") Integer userId, @Param("newPassword") String newPassword);
+    @Query("UPDATE LuUser u SET u.password = :newPassword, u.updateTime = :updateTime WHERE u.userId = :userId")
+    void changePassword(@Param("userId") Integer userId, @Param("newPassword") String newPassword, @Param("updateTime") Date updateTime);
 }

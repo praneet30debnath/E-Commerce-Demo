@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 import java.util.Date;
@@ -21,9 +22,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
  */
 @Entity
 @Table(name = "lu_user")
-@EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
-        allowGetters = true)
 public class LuUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +34,7 @@ public class LuUser {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "email_id")
+    @Column(name = "email_id", unique = true)
     private String emailId;
 
     @Column(name = "phone_number")
@@ -129,13 +127,5 @@ public class LuUser {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-    
-    
-
-    @PrePersist
-    protected void onCreate() {
-        createTime = new Date();
-        updateTime = new Date();
     }
 }
