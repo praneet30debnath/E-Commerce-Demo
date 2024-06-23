@@ -1,18 +1,21 @@
 package com.project.shopsmart.controller;
 
-import com.project.shopsmart.manager.LuUserManager;
-import com.project.shopsmart.model.LuUser;
-import com.project.shopsmart.repository.LuUserRepository;
+import java.util.Date;
+import java.util.List;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
-import java.util.List;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.project.shopsmart.manager.LuUserManager;
+import com.project.shopsmart.model.LuUser;
+import com.project.shopsmart.repository.LuUserRepository;
 
 /**
  * Created by rajeevkumarsingh on 27/06/17.
@@ -26,7 +29,6 @@ public class LuUserController {
 
     private LuUserManager luUserManager;
 
-    @Autowired
     public LuUserController(LuUserManager luUserManager) {
         this.luUserManager = luUserManager;
     }

@@ -2,7 +2,6 @@ package com.project.shopsmart.manager.impl;
 
 import java.util.Date;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.shopsmart.dao.LuUserDao;
@@ -12,7 +11,6 @@ import com.project.shopsmart.manager.LuUserManager;
 public class LuUserManagerImpl implements LuUserManager {
     private LuUserDao luUserDao;
 
-    @Autowired
     public LuUserManagerImpl(LuUserDao luUserDao) {
         this.luUserDao = luUserDao;
     }
